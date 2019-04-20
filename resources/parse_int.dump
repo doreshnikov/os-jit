@@ -20,7 +20,7 @@ Disassembly of section .text:
   31:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
   35:	0f b6 00             	movzbl (%rax),%eax
   38:	84 c0                	test   %al,%al
-  3a:	74 5d                	je     99 <_Z9parse_intPKc+0x99>
+  3a:	74 48                	je     84 <_Z9parse_intPKc+0x84>
   3c:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
   40:	0f b6 00             	movzbl (%rax),%eax
   43:	3c 39                	cmp    $0x39,%al
@@ -28,35 +28,28 @@ Disassembly of section .text:
   47:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
   4b:	0f b6 00             	movzbl (%rax),%eax
   4e:	0f be c0             	movsbl %al,%eax
-  51:	83 e8 61             	sub    $0x61,%eax
+  51:	83 e8 57             	sub    $0x57,%eax
   54:	eb 0d                	jmp    63 <_Z9parse_intPKc+0x63>
   56:	48 8b 45 f0          	mov    -0x10(%rbp),%rax
   5a:	0f b6 00             	movzbl (%rax),%eax
   5d:	0f be c0             	movsbl %al,%eax
   60:	83 e8 30             	sub    $0x30,%eax
   63:	89 45 ec             	mov    %eax,-0x14(%rbp)
-  66:	83 7d ec 00          	cmpl   $0x0,-0x14(%rbp)
-  6a:	78 26                	js     92 <_Z9parse_intPKc+0x92>
-  6c:	8b 45 ec             	mov    -0x14(%rbp),%eax
-  6f:	39 45 e8             	cmp    %eax,-0x18(%rbp)
-  72:	76 1e                	jbe    92 <_Z9parse_intPKc+0x92>
-  74:	8b 45 e4             	mov    -0x1c(%rbp),%eax
-  77:	0f af 45 e8          	imul   -0x18(%rbp),%eax
-  7b:	89 45 e4             	mov    %eax,-0x1c(%rbp)
-  7e:	48 8d 45 e4          	lea    -0x1c(%rbp),%rax
-  82:	8b 08                	mov    (%rax),%ecx
-  84:	8b 55 ec             	mov    -0x14(%rbp),%edx
-  87:	01 ca                	add    %ecx,%edx
-  89:	89 10                	mov    %edx,(%rax)
-  8b:	48 83 45 f0 01       	addq   $0x1,-0x10(%rbp)
-  90:	eb 9f                	jmp    31 <_Z9parse_intPKc+0x31>
-  92:	b8 ff ff ff ff       	mov    $0xffffffff,%eax
-  97:	eb 03                	jmp    9c <_Z9parse_intPKc+0x9c>
-  99:	8b 45 e4             	mov    -0x1c(%rbp),%eax
-  9c:	48 8b 75 f8          	mov    -0x8(%rbp),%rsi
-  a0:	64 48 33 34 25 28 00 	xor    %fs:0x28,%rsi
-  a7:	00 00 
-  a9:	74 05                	je     b0 <_Z9parse_intPKc+0xb0>
-  ab:	e8 00 00 00 00       	callq  b0 <_Z9parse_intPKc+0xb0>
-  b0:	c9                   	leaveq 
-  b1:	c3                   	retq   
+  66:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+  69:	0f af 45 e8          	imul   -0x18(%rbp),%eax
+  6d:	89 45 e4             	mov    %eax,-0x1c(%rbp)
+  70:	48 8d 45 e4          	lea    -0x1c(%rbp),%rax
+  74:	8b 08                	mov    (%rax),%ecx
+  76:	8b 55 ec             	mov    -0x14(%rbp),%edx
+  79:	01 ca                	add    %ecx,%edx
+  7b:	89 10                	mov    %edx,(%rax)
+  7d:	48 83 45 f0 01       	addq   $0x1,-0x10(%rbp)
+  82:	eb ad                	jmp    31 <_Z9parse_intPKc+0x31>
+  84:	8b 45 e4             	mov    -0x1c(%rbp),%eax
+  87:	48 8b 75 f8          	mov    -0x8(%rbp),%rsi
+  8b:	64 48 33 34 25 28 00 	xor    %fs:0x28,%rsi
+  92:	00 00 
+  94:	74 05                	je     9b <_Z9parse_intPKc+0x9b>
+  96:	e8 00 00 00 00       	callq  9b <_Z9parse_intPKc+0x9b>
+  9b:	c9                   	leaveq 
+  9c:	c3                   	retq   

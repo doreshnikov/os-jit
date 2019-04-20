@@ -8,7 +8,7 @@ char const *to_string(unsigned int value) {
     while (value > 0) {
         unsigned int digit = value % radix;
         digits[i] =  digit > 9 ? 'a' + digit - 10 : '0' + digit;
-        value %= radix;
+        value /= radix;
         i++;
     }
     digits[i--] = 0;

@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
 
-script/dump.sh parse_int 2>script/.log
-script/extract.sh <resourses/jit10.dump 2>&1 >resourses/.code
+cd script
+./dump.sh parse_int
+./dump.sh to_string
+./extract.sh parse_int
+./extract.sh to_string
+cd ..
+
+g++ -std=c++14 -g -DDEFAULT_RADIX=$1 jit-executor.cpp -o jit-executor

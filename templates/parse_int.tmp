@@ -10,7 +10,8 @@ int parse_int(char const *token) {
         if (digit >= 0 && digit < radix) {
             (value *= radix) += digit;
         } else {
-            return -1;
+            value = -1;
+            break;
         }
     }
     return value;

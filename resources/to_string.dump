@@ -36,7 +36,7 @@ Disassembly of section .text:
   5f:	8b 45 dc             	mov    -0x24(%rbp),%eax
   62:	ba 00 00 00 00       	mov    $0x0,%edx
   67:	f7 75 f0             	divl   -0x10(%rbp)
-  6a:	89 55 dc             	mov    %edx,-0x24(%rbp)
+  6a:	89 45 dc             	mov    %eax,-0x24(%rbp)
   6d:	83 45 e8 01          	addl   $0x1,-0x18(%rbp)
   71:	eb b4                	jmp    27 <_Z9to_stringj+0x27>
   73:	8b 45 e8             	mov    -0x18(%rbp),%eax

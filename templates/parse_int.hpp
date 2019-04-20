@@ -6,12 +6,61 @@ int parse_int(char const *token) {
     unsigned int value = 0;
     unsigned int radix = DEFAULT_RADIX;
     for (char const *c = token; *c != '\0'; c++) {
-        int digit = *c > '9' ? *c - 'a' : *c - '0';
-        if (digit >= 0 && digit < radix) {
-            (value *= radix) += digit;
-        } else {
-            return -1;
-        }
+        int digit = *c > '9' ? *c - 'a' + 10 : *c - '0';
+        (value *= radix) += digit;
     }
     return value;
 }
+
+// @formatter:off
+unsigned char parse_int_code[] = {
+	0x55,                                     	// push   %rbp
+	0x48, 0x89, 0xe5,                         	// mov    %rsp,%rbp
+	0x48, 0x83, 0xec, 0x30,                   	// sub    $0x30,%rsp
+	0x48, 0x89, 0x7d, 0xd8,                   	// mov    %rdi,-0x28(%rbp)
+	0x64, 0x48, 0x8b, 0x04, 0x25, 0x28, 0x00, 	// mov    %fs:0x28,%rax
+	0x00, 0x00,                               	
+	0x48, 0x89, 0x45, 0xf8,                   	// mov    %rax,-0x8(%rbp)
+	0x31, 0xc0,                               	// xor    %eax,%eax
+	0xc7, 0x45, 0xe4, 0x00, 0x00, 0x00, 0x00, 	// movl   $0x0,-0x1c(%rbp)
+	0xc7, 0x45, 0xe8, 0x0a, 0x00, 0x00, 0x00, 	// movl   $0xa,-0x18(%rbp)
+	0x48, 0x8b, 0x45, 0xd8,                   	// mov    -0x28(%rbp),%rax
+	0x48, 0x89, 0x45, 0xf0,                   	// mov    %rax,-0x10(%rbp)
+	0x48, 0x8b, 0x45, 0xf0,                   	// mov    -0x10(%rbp),%rax
+	0x0f, 0xb6, 0x00,                         	// movzbl (%rax),%eax
+	0x84, 0xc0,                               	// test   %al,%al
+	0x74, 0x48,                               	// je     84 <_Z9parse_intPKc+0x84>
+	0x48, 0x8b, 0x45, 0xf0,                   	// mov    -0x10(%rbp),%rax
+	0x0f, 0xb6, 0x00,                         	// movzbl (%rax),%eax
+	0x3c, 0x39,                               	// cmp    $0x39,%al
+	0x7e, 0x0f,                               	// jle    56 <_Z9parse_intPKc+0x56>
+	0x48, 0x8b, 0x45, 0xf0,                   	// mov    -0x10(%rbp),%rax
+	0x0f, 0xb6, 0x00,                         	// movzbl (%rax),%eax
+	0x0f, 0xbe, 0xc0,                         	// movsbl %al,%eax
+	0x83, 0xe8, 0x57,                         	// sub    $0x57,%eax
+	0xeb, 0x0d,                               	// jmp    63 <_Z9parse_intPKc+0x63>
+	0x48, 0x8b, 0x45, 0xf0,                   	// mov    -0x10(%rbp),%rax
+	0x0f, 0xb6, 0x00,                         	// movzbl (%rax),%eax
+	0x0f, 0xbe, 0xc0,                         	// movsbl %al,%eax
+	0x83, 0xe8, 0x30,                         	// sub    $0x30,%eax
+	0x89, 0x45, 0xec,                         	// mov    %eax,-0x14(%rbp)
+	0x8b, 0x45, 0xe4,                         	// mov    -0x1c(%rbp),%eax
+	0x0f, 0xaf, 0x45, 0xe8,                   	// imul   -0x18(%rbp),%eax
+	0x89, 0x45, 0xe4,                         	// mov    %eax,-0x1c(%rbp)
+	0x48, 0x8d, 0x45, 0xe4,                   	// lea    -0x1c(%rbp),%rax
+	0x8b, 0x08,                               	// mov    (%rax),%ecx
+	0x8b, 0x55, 0xec,                         	// mov    -0x14(%rbp),%edx
+	0x01, 0xca,                               	// add    %ecx,%edx
+	0x89, 0x10,                               	// mov    %edx,(%rax)
+	0x48, 0x83, 0x45, 0xf0, 0x01,             	// addq   $0x1,-0x10(%rbp)
+	0xeb, 0xad,                               	// jmp    31 <_Z9parse_intPKc+0x31>
+	0x8b, 0x45, 0xe4,                         	// mov    -0x1c(%rbp),%eax
+	0x48, 0x8b, 0x75, 0xf8,                   	// mov    -0x8(%rbp),%rsi
+	0x64, 0x48, 0x33, 0x34, 0x25, 0x28, 0x00, 	// xor    %fs:0x28,%rsi
+	0x00, 0x00,                               	
+	0x74, 0x05,                               	// je     9b <_Z9parse_intPKc+0x9b>
+	0xe8, 0x00, 0x00, 0x00, 0x00,             	// callq  9b <_Z9parse_intPKc+0x9b>
+	0xc9,                                     	// leaveq 
+	0xc3,                                     	// retq   
+};
+// @formatter:on
