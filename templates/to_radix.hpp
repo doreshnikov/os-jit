@@ -1,7 +1,7 @@
 /*
  * Returns given unsigned integer value string representation in specified radix.
  */
-char const *to_string(unsigned int value) {
+char const *to_radix(unsigned int value) {
     unsigned int i = 0;
     unsigned int radix = DEFAULT_RADIX;
     char *digits = new char[33];
@@ -22,7 +22,7 @@ char const *to_string(unsigned int value) {
 }
 
 // @formatter:off
-unsigned char to_string_code[] = {
+unsigned char to_radix_code[] = {
 	0x55,                                     	// push   %rbp
 	0x48, 0x89, 0xe5,                         	// mov    %rsp,%rbp
 	0x48, 0x83, 0xec, 0x30,                   	// sub    $0x30,%rsp
@@ -30,20 +30,20 @@ unsigned char to_string_code[] = {
 	0xc7, 0x45, 0xe8, 0x00, 0x00, 0x00, 0x00, 	// movl   $0x0,-0x18(%rbp)
 	0xc7, 0x45, 0xf0, 0x0a, 0x00, 0x00, 0x00, 	// movl   $0xa,-0x10(%rbp)
 	0xbf, 0x21, 0x00, 0x00, 0x00,             	// mov    $0x21,%edi
-	0xe8, 0x00, 0x00, 0x00, 0x00,             	// callq  23 <_Z9to_stringj+0x23>
+	0xe8, 0x00, 0x00, 0x00, 0x00,             	// callq  23 <_Z8to_radixj+0x23>
 	0x48, 0x89, 0x45, 0xf8,                   	// mov    %rax,-0x8(%rbp)
 	0x83, 0x7d, 0xdc, 0x00,                   	// cmpl   $0x0,-0x24(%rbp)
-	0x74, 0x46,                               	// je     73 <_Z9to_stringj+0x73>
+	0x74, 0x46,                               	// je     73 <_Z8to_radixj+0x73>
 	0x8b, 0x45, 0xdc,                         	// mov    -0x24(%rbp),%eax
 	0xba, 0x00, 0x00, 0x00, 0x00,             	// mov    $0x0,%edx
 	0xf7, 0x75, 0xf0,                         	// divl   -0x10(%rbp)
 	0x89, 0x55, 0xf4,                         	// mov    %edx,-0xc(%rbp)
 	0x83, 0x7d, 0xf4, 0x09,                   	// cmpl   $0x9,-0xc(%rbp)
-	0x76, 0x0a,                               	// jbe    4b <_Z9to_stringj+0x4b>
+	0x76, 0x0a,                               	// jbe    4b <_Z8to_radixj+0x4b>
 	0x8b, 0x45, 0xf4,                         	// mov    -0xc(%rbp),%eax
 	0x83, 0xc0, 0x57,                         	// add    $0x57,%eax
 	0x89, 0xc1,                               	// mov    %eax,%ecx
-	0xeb, 0x08,                               	// jmp    53 <_Z9to_stringj+0x53>
+	0xeb, 0x08,                               	// jmp    53 <_Z8to_radixj+0x53>
 	0x8b, 0x45, 0xf4,                         	// mov    -0xc(%rbp),%eax
 	0x83, 0xc0, 0x30,                         	// add    $0x30,%eax
 	0x89, 0xc1,                               	// mov    %eax,%ecx
@@ -56,7 +56,7 @@ unsigned char to_string_code[] = {
 	0xf7, 0x75, 0xf0,                         	// divl   -0x10(%rbp)
 	0x89, 0x45, 0xdc,                         	// mov    %eax,-0x24(%rbp)
 	0x83, 0x45, 0xe8, 0x01,                   	// addl   $0x1,-0x18(%rbp)
-	0xeb, 0xb4,                               	// jmp    27 <_Z9to_stringj+0x27>
+	0xeb, 0xb4,                               	// jmp    27 <_Z8to_radixj+0x27>
 	0x8b, 0x45, 0xe8,                         	// mov    -0x18(%rbp),%eax
 	0x8d, 0x50, 0xff,                         	// lea    -0x1(%rax),%edx
 	0x89, 0x55, 0xe8,                         	// mov    %edx,-0x18(%rbp)
@@ -67,7 +67,7 @@ unsigned char to_string_code[] = {
 	0xc7, 0x45, 0xec, 0x00, 0x00, 0x00, 0x00, 	// movl   $0x0,-0x14(%rbp)
 	0x8b, 0x45, 0xec,                         	// mov    -0x14(%rbp),%eax
 	0x39, 0x45, 0xe8,                         	// cmp    %eax,-0x18(%rbp)
-	0x76, 0x50,                               	// jbe    e7 <_Z9to_stringj+0xe7>
+	0x76, 0x50,                               	// jbe    e7 <_Z8to_radixj+0xe7>
 	0x8b, 0x55, 0xe8,                         	// mov    -0x18(%rbp),%edx
 	0x48, 0x8b, 0x45, 0xf8,                   	// mov    -0x8(%rbp),%rax
 	0x48, 0x01, 0xd0,                         	// add    %rdx,%rax
@@ -93,7 +93,7 @@ unsigned char to_string_code[] = {
 	0x48, 0x01, 0xc2,                         	// add    %rax,%rdx
 	0x0f, 0xb6, 0x45, 0xe7,                   	// movzbl -0x19(%rbp),%eax
 	0x88, 0x02,                               	// mov    %al,(%rdx)
-	0xeb, 0xa8,                               	// jmp    8f <_Z9to_stringj+0x8f>
+	0xeb, 0xa8,                               	// jmp    8f <_Z8to_radixj+0x8f>
 	0x48, 0x8b, 0x45, 0xf8,                   	// mov    -0x8(%rbp),%rax
 	0xc9,                                     	// leaveq 
 	0xc3,                                     	// retq   

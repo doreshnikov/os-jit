@@ -2,15 +2,10 @@
 
 target=$1
 
-parse_int="<_Z9parse_intPKc>"
-to_string="<_Z9to_stringj>"
-
-target_line=${!target}
-
-if [[ ${target} != "" ]] && [[ ${target_line} != "" ]]; then
+if [[ ${target} != "" ]]; then
     input=../resources/${target}.dump
     output=../templates/${target}.hpp
-    echo output is ${output}
+    echo [3] output is ${output}
 
     mode=0
     nsym=0
@@ -19,7 +14,7 @@ if [[ ${target} != "" ]] && [[ ${target_line} != "" ]]; then
     argslines=()
     taillines=()
 
-    echo reading from ${input}...
+    echo $'\t'[-] reading from ${input}...
     while IFS= read -r line
     do
         if [[ ${mode} -eq 1 ]]; then
@@ -33,13 +28,13 @@ if [[ ${target} != "" ]] && [[ ${target_line} != "" ]]; then
             taillines[${i}]="${tail}"
             i=$(( $i + 1 ))
         fi
-        if [[ ${line} == *${target_line}* ]]; then
+        if [[ ${line} == *\<_Z*${target}* ]] && [[ ${mode} -eq 0 ]]; then
             mode=1
             i=0
-            echo collecting ${line}
+            echo $'\t'[-] collecting ${line}
         elif [[ ${line} == *"ret"* ]] && [[ ${mode} -eq 1 ]]; then
             sep=$(printf '%-'${nsym}'s' " ")
-            echo collected
+            echo $'\t'[-] collected
 
             echo $'\n'$'\n'"// @formatter:off" >>${output}
             echo "unsigned char ${target}_code[] = {" >>${output}

@@ -1,11 +1,9 @@
 #include <iostream>
 
-#include "templates/parse_int.hpp"
-#include "templates/to_string.hpp"
+#include "templates/to_radix.hpp"
 
-int main() {
+int main(int argc, char *argv[]) {
 
-
-    std::cout << parse_int("55") << " " << to_string(85) << std::endl;
+    std::cout << to_radix(std::stoi(argv[1])) << std::endl;
 
 }
