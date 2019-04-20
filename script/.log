@@ -1,0 +1,12 @@
+2c2
+< resourses/jit10.o:     file format elf64-x86-64
+---
+> resourses/jit16.o:     file format elf64-x86-64
+17c17
+<   22:	c7 45 dc 0a 00 00 00 	movl   $0xa,-0x24(%rbp)
+---
+>   22:	c7 45 dc 10 00 00 00 	movl   $0x10,-0x24(%rbp)
+131c131
+<  19a:	be 0a 00 00 00       	mov    $0xa,%esi
+---
+>  19a:	be 10 00 00 00       	mov    $0x10,%esi

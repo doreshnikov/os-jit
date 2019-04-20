@@ -1,6 +1,5 @@
 .idea/
 .git/
-resourses/
 cmake-build-*
 
 jit-executor.exe
@@ -8,4 +7,3 @@ jit-executor
 
 *.swp
 *.o
-*.dump
