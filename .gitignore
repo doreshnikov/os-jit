@@ -1,6 +1,11 @@
 .idea/
 .git/
+resourses/
 cmake-build-*
 
-jit-compiler.exe
-jit-compiler
+jit-executor.exe
+jit-executor
+
+*.swp
+*.o
+*.dump
