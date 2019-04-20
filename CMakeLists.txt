@@ -3,5 +3,4 @@ project(jit)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_compile_definitions(DEFAULT_RADIX=10)
-add_executable(jit-executor jit-executor.cpp)
+add_custom_target(run ./build.sh to_radix && ./jit-executor 100)

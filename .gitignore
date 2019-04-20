@@ -1,5 +1,6 @@
 .idea/
 .git/
+CMakeFiles/
 cmake-build-*
 
 jit-executor.exe
@@ -8,3 +9,7 @@ jit-executor
 *.swp
 *.o
 *.log
+
+CMakeCache.txt
+cmake_install.cmake
+Makefile
