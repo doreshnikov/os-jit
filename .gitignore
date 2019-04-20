@@ -7,3 +7,4 @@ jit-executor
 
 *.swp
 *.o
+*.log
