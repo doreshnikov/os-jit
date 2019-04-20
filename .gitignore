@@ -1,0 +1,6 @@
+.idea/
+.git/
+cmake-build-*
+
+jit-compiler.exe
+jit-compiler
