@@ -5,8 +5,8 @@ target=$1
 if [[ ${target} != "" ]]; then
     echo [1] build...
     cp ../templates/${target}.tmp ../templates/${target}.cpp
-    g++ -std=c++14 -g -c -DDEFAULT_RADIX=$2 ../templates/${target}.cpp -o ../resources/${target}.o
-    g++ -std=c++14 -g -c -DDEFAULT_RADIX=16 ../templates/${target}.cpp -o ../resources/cmp.o
+    g++ -std=c++14 -g -c -DDEFAULT_VALUE=2 ../templates/${target}.cpp -o ../resources/${target}.o
+    g++ -std=c++14 -g -c -DDEFAULT_VALUE=16 ../templates/${target}.cpp -o ../resources/cmp.o
     mv ../templates/${target}.cpp ../templates/${target}.hpp
 
     echo [2] dump...

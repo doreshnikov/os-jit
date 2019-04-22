@@ -1,0 +1,13 @@
+/*
+ * Returns the integer logarithm of given unsigned integer `value` with specified `base`.
+ */
+unsigned int logarithm(unsigned int value) {
+    unsigned int i = 0;
+    unsigned int base = DEFAULT_VALUE;
+    while (value > 0) {
+        unsigned int digit = value % base;
+        value /= base;
+        i++;
+    }
+    return i;
+}
